@@ -5,6 +5,7 @@ import { data } from "./data";
 
 function App() {
   const initialSelectedFilters: { [key: string]: string[] } = {};
+
   data.forEach((item) => {
     Object.keys(item).forEach((key) => {
       if (key !== "id" && key !== "name") {
@@ -36,15 +37,13 @@ function App() {
   const applyFilters = () => {
     return data.filter((item) => {
       return (
-        // Check if every selected filter matches the item
         Object.keys(selectedFilters).every((key) => {
           if (selectedFilters[key].length === 0) {
-            return true; // If no filters selected for this key, include the item
+            return true; 
           } else {
             return selectedFilters[key].includes(item[key]);
           }
         }) &&
-        // Check if the name matches the search name (if provided)
         (searchName.trim() === "" ||
           (item.hasOwnProperty("name") &&
             (item as { name?: string }).name &&
@@ -59,6 +58,7 @@ function App() {
     const uniqueValues = Array.from(
       new Set(data.map((item) => item[key]))
     ).filter((value) => value !== undefined);
+
     return uniqueValues.map((value) => (
       <div key={value}>
         <Switch
@@ -70,7 +70,6 @@ function App() {
     ));
   };
 
-  // Check if data has the 'name' property
   const hasNameField = data.some((item) => item.hasOwnProperty("name"));
 
   const allKeys = data.reduce((keys, item) => {
@@ -82,7 +81,6 @@ function App() {
     return keys;
   }, []);
 
-  // Generate table columns dynamically
   const columns = allKeys.map((key) => ({
     title: key.toUpperCase(),
     dataIndex: key,
@@ -90,7 +88,6 @@ function App() {
     render: (text: string) => text || "-",
   }));
 
-  // Generate table data based on applied filters
   const filteredData = applyFilters();
   const tableData = filteredData.map((item) => ({
     key: item.id.toString(),
@@ -98,11 +95,11 @@ function App() {
   }));
 
   return (
-    <>
-      <div className="flex justify-center m-5">
+    <div className=" p-3 h-screen">
+      <div className="flex justify-center m-5 ">
         <div className=" border-gray-400  flex justify-center m-5">
           {Object.keys(initialSelectedFilters).map((key) => (
-            <div key={key} className="border-r px-2">
+            <div key={key} className="border-r px-4">
               <h1 className="text-center font-bold capitalize mb-2 text-lg">
                 {key}
               </h1>
@@ -110,7 +107,7 @@ function App() {
             </div>
           ))}
           {hasNameField && (
-            <div className="border-r px-2">
+            <div className=" px-2">
               <h1 className="text-center font-bold capitalize mb-2 text-lg">
                 name
               </h1>
@@ -133,7 +130,7 @@ function App() {
           bordered
         />
       </div>
-    </>
+    </div>
   );
 }
 
