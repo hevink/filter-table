@@ -8,6 +8,8 @@
 
 - [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework for rapidly building custom designs.🐊
 
+- [TypeScript](https://www.typescriptlang.org/): A typed superset of JavaScript that compiles to plain JavaScript.🚀
+
 ## Getting Started
 
 These instructions will help you set up and run the project on your local machine.
